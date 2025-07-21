@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+@layer components {
+  .linkSide {
+    @apply flex items-center space-x-2 hover:bg-blue-100  p-4 rounded-md w-52 hover:text-blue-700;
+  }
+  .linkSide-active {
+    @apply bg-blue-100 text-blue-700 font-semibold;
+  }
+}
