@@ -10,6 +10,8 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import BookingsPage from "./pages/BookingsPage";
 import PropertiesPage from "./pages/PropertiesPage";
 import UsersPage from "./pages/UsersPage";
+import ProtectedRoute from "./ui/ProtectedRoute";
+import { Toaster } from "react-hot-toast";
 function App() {
   const queryClient = new QueryClient();
   return (
@@ -17,7 +19,13 @@ function App() {
       <ReactQueryDevtools buttonPosition="bottom-left" />
       <BrowserRouter>
         <Routes>
-          <Route element={<AppLayout />}>
+          <Route
+            element={
+              <ProtectedRoute>
+                <AppLayout />
+              </ProtectedRoute>
+            }
+          >
             <Route index path="/" element={<Navigate replace to="home" />} />
             <Route path="/home" element={<HomePage />} />
             <Route path="/properties" element={<PropertiesPage />} />
@@ -29,6 +37,24 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
+      <Toaster
+        position="top-center"
+        gutter={12}
+        containerStyle={{ margin: "8px" }}
+        toastOptions={{
+          success: {
+            duration: 3000,
+          },
+          error: {
+            duration: 5000,
+          },
+          style: {
+            fontSize: "16px",
+            maxWidth: "500px",
+            padding: "16px 24px",
+          },
+        }}
+      />
     </QueryClientProvider>
   );
 }

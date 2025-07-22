@@ -5,7 +5,9 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { MdOutlineDashboardCustomize } from "react-icons/md";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import { NavLink } from "react-router-dom";
+import { useLogout } from "../features/auth/useLogout";
 export default function SidebarLinks({ onClick }) {
+  const { logout } = useLogout();
   return (
     <>
       <ul className="space-y-2 border-b pb-16 border-b-gray-300">
@@ -85,12 +87,12 @@ export default function SidebarLinks({ onClick }) {
           </NavLink>
         </li>
       </ul>
-      <NavLink onClick={onClick} to="/login" className="linkSide mt-8">
+      <button onClick={logout} className="linkSide mt-8">
         <span>
           <BiLogOut />
         </span>
         <span>Logout</span>
-      </NavLink>
+      </button>
     </>
   );
 }
