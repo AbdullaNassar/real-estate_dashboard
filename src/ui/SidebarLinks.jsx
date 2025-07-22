@@ -10,7 +10,7 @@ export default function SidebarLinks({ onClick }) {
   const { logout } = useLogout();
   return (
     <>
-      <ul className="space-y-2 border-b pb-16 border-b-gray-300">
+      <ul className="space-y-2 border-b pb-16 text-sm border-b-gray-300 text-stone-600">
         <li>
           <NavLink
             onClick={onClick}
@@ -87,7 +87,7 @@ export default function SidebarLinks({ onClick }) {
           </NavLink>
         </li>
       </ul>
-      <button onClick={logout} className="linkSide mt-8">
+      <button onClick={logout} className="linkSide mt-8 text-stone-600">
         <span>
           <BiLogOut />
         </span>

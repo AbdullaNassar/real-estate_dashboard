@@ -8,7 +8,7 @@ export function SidebarModal({ isOpen, onCancel }) {
 
   return ReactDOM.createPortal(
     <div className=" fixed top-0 left-0 w-full h-full bg-black/70 flex justify-center items-center z-50  ">
-      <div className="bg-white  rounded-md absolute top-0 left-0 h- w-1/2 ">
+      <div className="bg-white  rounded-md absolute top-0 left-0 h-full w-full sm:w-1/2 text-stone-600 ">
         <div className="relative p-2 ">
           <button
             className="text-4xl absolute top-1 right-2"

@@ -17,7 +17,7 @@ export default function UsersPage() {
   return (
     <div className="h-full flex flex-col justify-between">
       <div className="overflow-x-auto rounded-box border border-base-content/5 ">
-        <table className="table table-xs sm:table-sm md:table-md lg:table-lg  border border-gray-300 divide-y divide-gray-300">
+        <table className="table table-xs sm:table-sm md:table-md  border border-gray-300 divide-y divide-gray-300">
           <thead className="bg-gray-100">
             <tr>
               <th className="px-6 py-3 text-left text-sm font-medium text-gray-700"></th>

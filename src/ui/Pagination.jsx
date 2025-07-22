@@ -11,14 +11,14 @@ export default function Pagination({
       <button
         onClick={onCLickPrev}
         disabled={disabledPrev}
-        className="bg-gray-200 px-4 py-2 rounded-sm hover:bg-gray-300 hover:cursor-pointer transition-all "
+        className="bg-gray-200 px-4 py-2 rounded-sm hover:bg-blue-500 hover:text-white hover:cursor-pointer transition-all "
       >
         &lt; Previous
       </button>
       <button
         onClick={onClickNext}
         disabled={disabledNext}
-        className="bg-gray-200 px-4 py-2 rounded-sm hover:bg-gray-300 hover:cursor-pointer transition-all "
+        className="bg-gray-200 px-4 py-2 rounded-sm hover:bg-blue-500 hover:text-white hover:cursor-pointer transition-all "
       >
         Next &gt;
       </button>
