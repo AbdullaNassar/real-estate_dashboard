@@ -10,7 +10,7 @@ export default function SidebarLinks({ onClick }) {
   const { logout } = useLogout();
   return (
     <>
-      <ul className="space-y-2 border-b pb-16 text-sm border-b-gray-300 text-stone-600">
+      <ul className="space-y-2 border-b pb-16 text-sm md:text-lg border-b-gray-300 text-stone-600">
         <li>
           <NavLink
             onClick={onClick}

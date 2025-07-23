@@ -12,36 +12,43 @@ import PropertiesPage from "./pages/PropertiesPage";
 import UsersPage from "./pages/UsersPage";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import { Toaster } from "react-hot-toast";
+import { Provider } from "react-redux";
+import store from "./store";
 function App() {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools buttonPosition="bottom-left" />
       <BrowserRouter>
-        <Routes>
-          <Route
-            element={
-              <ProtectedRoute>
-                <AppLayout />
-              </ProtectedRoute>
-            }
-          >
-            <Route index path="/" element={<Navigate replace to="home" />} />
-            <Route path="/home" element={<HomePage />} />
-            <Route path="/properties" element={<PropertiesPage />} />
-            <Route path="/bookings" element={<BookingsPage />} />
-            <Route path="/users" element={<UsersPage />} />
-            <Route path="/settings" element={<Settings />} />
-          </Route>
-          <Route path="/login" element={<Login />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <Provider store={store}>
+          <Routes>
+            <Route
+              element={
+                <ProtectedRoute>
+                  <AppLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route index path="/" element={<Navigate replace to="home" />} />
+              <Route path="/home" element={<HomePage />} />
+              <Route path="/properties" element={<PropertiesPage />} />
+              <Route path="/bookings" element={<BookingsPage />} />
+              <Route path="/users" element={<UsersPage />} />
+              <Route path="/settings" element={<Settings />} />
+            </Route>
+            <Route path="/login" element={<Login />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Provider>
       </BrowserRouter>
       <Toaster
         position="top-center"
         gutter={12}
         containerStyle={{ margin: "8px" }}
         toastOptions={{
+          iconTheme: {
+            primary: "#3B82F6",
+          },
           success: {
             duration: 3000,
           },

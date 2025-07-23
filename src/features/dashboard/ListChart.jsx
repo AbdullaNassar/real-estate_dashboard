@@ -4,7 +4,7 @@ import Error from "../../ui/Error";
 import Spinner from "../../ui/Spinner";
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 export default function ListChart() {
-  const startDataLight = [
+  const startData = [
     {
       duration: "studio",
       value: 0,
@@ -22,52 +22,7 @@ export default function ListChart() {
     },
   ];
 
-  const startDataDark = [
-    {
-      duration: "1 night",
-      value: 0,
-      color: "#b91c1c",
-    },
-    {
-      duration: "2 nights",
-      value: 0,
-      color: "#c2410c",
-    },
-    {
-      duration: "3 nights",
-      value: 0,
-      color: "#a16207",
-    },
-    {
-      duration: "4-5 nights",
-      value: 0,
-      color: "#4d7c0f",
-    },
-    {
-      duration: "6-7 nights",
-      value: 0,
-      color: "#15803d",
-    },
-    {
-      duration: "8-14 nights",
-      value: 0,
-      color: "#0f766e",
-    },
-    {
-      duration: "15-21 nights",
-      value: 0,
-      color: "#1d4ed8",
-    },
-    {
-      duration: "21+ nights",
-      value: 0,
-      color: "#7e22ce",
-    },
-  ];
-
   function prepareData(startData, stays) {
-    // A bit ugly code, but sometimes this is what it takes when working with real data 😅
-
     function incArrayValue(arr, field) {
       return arr.map((obj) =>
         obj.duration === field ? { ...obj, value: obj.value + 1 } : obj
@@ -88,17 +43,15 @@ export default function ListChart() {
     return data;
   }
 
-  const { data: confirmedStays, isLoading, error } = useProperties();
-
+  const { data: result, isLoading, error } = useProperties();
   if (isLoading) return <Spinner />;
-  console.log(confirmedStays);
+  if (error) return <Error message={error.message} />;
 
-  const isDarkMode = false;
-  const startData = isDarkMode ? startDataDark : startDataLight;
+  const confirmedStays = result?.data ?? [];
   const data = prepareData(startData, confirmedStays);
   return (
     <div className=" w-full max-w-4xl mx-auto  bg-white">
-      <h2 className="font-semibold text-2xl">Listing</h2>
+      <h2 className="font-bold text-2xl p-4">Types of Listings</h2>
       <ResponsiveContainer width="100%" height={250}>
         <PieChart>
           <Pie

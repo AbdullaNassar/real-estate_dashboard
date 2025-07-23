@@ -9,17 +9,19 @@ import Spinner from "../../ui/Spinner";
 import Error from "../../ui/Error";
 export default function Stats() {
   const {
-    data: bookings,
+    data: bookingsResult,
     isLoading: isLodingBookings,
     error: errorBookings,
   } = useBookings();
+
   const {
-    data: properties,
+    data: listsResult,
     isLoading: isLodingProperties,
     error: errorProperties,
   } = useProperties();
+
   const {
-    data: users,
+    data: usersResult,
     isLoading: isLodingUsers,
     error: errorUsers,
   } = useUsers();
@@ -29,11 +31,17 @@ export default function Stats() {
   if (errorUsers || errorBookings || errorProperties)
     return <Error message={errorUsers?.message} />;
 
-  console.log(bookings, users, properties);
-  const totalEarnings = bookings.reduce((acc, cur) => acc + cur.totalPrice, 0);
-  const bookingNum = bookings.length;
-  const PropertiesNum = properties.length;
-  const usersNum = users.length;
+  console.log(bookingsResult);
+  console.log(listsResult);
+  console.log(usersResult);
+  const totalEarnings = bookingsResult?.data?.reduce(
+    (acc, cur) => acc + cur.totalPrice,
+    0
+  );
+  console.log(totalEarnings);
+  const numBookings = bookingsResult?.count;
+  const numLists = listsResult?.count;
+  const numUsers = usersResult?.count;
 
   return (
     <div className=" bg-gray-100 ">
@@ -48,7 +56,7 @@ export default function Stats() {
         />
         <Stat
           title="Lists"
-          value={PropertiesNum}
+          value={numLists}
           description="15% lists increase"
           icon={<HiOutlineHomeModern />}
           color="text-red-600"
@@ -56,7 +64,7 @@ export default function Stats() {
         />
         <Stat
           title="All Bookings"
-          value={bookingNum}
+          value={numBookings}
           description="17% decrease on bookings"
           up={false}
           icon={<BsCart2 />}
@@ -65,7 +73,7 @@ export default function Stats() {
         />
         <Stat
           title="Users"
-          value={usersNum}
+          value={numUsers}
           description="13% users increase"
           icon={<HiOutlineUsers />}
           color="text-blue-600"

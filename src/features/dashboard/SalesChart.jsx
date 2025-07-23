@@ -61,7 +61,7 @@ export default function SalesChart() {
   ];
   return (
     <div className="w-full max-w-4xl mx-auto  bg-white">
-      <h2 className="font-semibold text-2xl">Sales</h2>
+      <h2 className="font-bold text-2xl p-4">Sales</h2>
       <ResponsiveContainer width="100%" height={250}>
         <AreaChart
           data={data5}

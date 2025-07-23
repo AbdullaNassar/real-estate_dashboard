@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { getProperties } from "../../services/apiProperties";
 
-export function useProperties() {
+export function useProperties(filter, sort, paginate) {
   const { isLoading, data, error } = useQuery({
-    queryKey: ["properties"],
-    queryFn: getProperties,
+    queryKey: ["properties", filter, sort, paginate],
+    queryFn: () => getProperties(filter, sort, paginate),
   });
   return { isLoading, data, error };
 }
