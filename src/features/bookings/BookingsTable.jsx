@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 import { useBookings } from "./useBookings";
@@ -6,9 +6,14 @@ import Spinner from "../../ui/Spinner";
 import Error from "../../ui/Error";
 import { useDispatch, useSelector } from "react-redux";
 import { setTotalPages } from "./BookingSLice";
+import { useDeleteBooking } from "./useDeleteBooking";
+import { ConfirmationModal } from "../../ui/Modal";
 
 const PAGE_LIMIT = 2;
 export default function BookingsTable() {
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+  const { isPending: isDeleting, mutate: deletBooking } = useDeleteBooking();
+
   const { filter, sort, page } = useSelector((state) => state.bookings);
   const dispatch = useDispatch();
 
@@ -28,7 +33,12 @@ export default function BookingsTable() {
   const total = result?.count ?? 0;
   const totalPages = Math.ceil(total / PAGE_LIMIT);
   dispatch(setTotalPages(totalPages));
-  console.log(bookings);
+
+  const handleDeleteBooking = (id) => {
+    // console.log(id);
+    deletBooking(id);
+    setIsOpenDeleteModal(false);
+  };
   return (
     <table className="table table-xs sm:table-sm md:table-md border border-gray-300 divide-y divide-gray-300">
       <thead className="bg-gray-100">
@@ -53,9 +63,7 @@ export default function BookingsTable() {
             Is Paid
           </th>
 
-          <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">
-            operations
-          </th>
+          <th className="px-6 py-3 text-left text-sm font-medium text-gray-700"></th>
         </tr>
       </thead>
       <tbody className="divide-y divide-gray-200 ">
@@ -74,12 +82,18 @@ export default function BookingsTable() {
               <td>{item.totalPrice}</td>
               <td>{item.paymentStatus ? "Yes" : "No"}</td>
               <td className="flex items-center">
-                <span className="p-2 hover:transform hover:scale-110 hover:cursor-pointer transition-all ">
-                  <FaRegEdit className="sm:text-2xl" />
-                </span>
-                <span className="p-2 hover:transform hover:scale-110 hover:cursor-pointer transition-all ">
+                <button
+                  onClick={() => setIsOpenDeleteModal(true)}
+                  className="p-2 hover:transform hover:scale-110 hover:cursor-pointer transition-all text-red-500"
+                >
                   <MdDeleteOutline className="sm:text-2xl" />
-                </span>
+                </button>
+                <ConfirmationModal
+                  title="Are you sure to delete this Booking?"
+                  isOpen={isOpenDeleteModal}
+                  onCancel={() => setIsOpenDeleteModal(false)}
+                  onConfirm={() => handleDeleteBooking(item.id)}
+                />
               </td>
             </tr>
           );

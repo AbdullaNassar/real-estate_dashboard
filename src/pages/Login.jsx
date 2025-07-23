@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useLogin } from "../features/auth/useLogin";
@@ -21,6 +21,10 @@ export default function Login() {
     const { email, password } = data;
     login({ email, password });
   }
+
+  useEffect(() => {
+    document.title = "Maskn | Login";
+  }, []);
   return (
     <div className="bg-gray-100 min-h-screen text-stone-900 flex justify-center items-center">
       <div className="w-[90%] sm:w-1/2 bg-white shadow-2xl px-8 py-4  flex flex-col justify-center items-center space-y-4">

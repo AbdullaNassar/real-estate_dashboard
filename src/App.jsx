@@ -46,9 +46,6 @@ function App() {
         gutter={12}
         containerStyle={{ margin: "8px" }}
         toastOptions={{
-          iconTheme: {
-            primary: "#3B82F6",
-          },
           success: {
             duration: 3000,
           },

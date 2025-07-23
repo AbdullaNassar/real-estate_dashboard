@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 import { useProperties } from "./UseProperties";
@@ -6,9 +6,13 @@ import Error from "../../ui/Error";
 import Spinner from "../../ui/Spinner";
 import { useDispatch, useSelector } from "react-redux";
 import { setTotalPages } from "./ProprtiesSlice";
+import { useDeleteList } from "./useDeleteList";
+import { ConfirmationModal } from "../../ui/Modal";
 const PAGE_LIMIT = 2;
 export default function ProprtiesTable() {
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   const { filter, sort, page } = useSelector((state) => state.properties);
+  const { isPending: isDeleting, mutate: mutateDelete } = useDeleteList();
   const dispatch = useDispatch();
   const {
     data: result,
@@ -25,6 +29,11 @@ export default function ProprtiesTable() {
   const total = result?.count ?? 0;
   const totalPages = Math.ceil(total / PAGE_LIMIT);
   dispatch(setTotalPages(totalPages));
+
+  const handleDeleteList = (id) => {
+    mutateDelete(id);
+    setIsOpenDeleteModal(false);
+  };
   return (
     <table className="table table-xs sm:table-sm md:table-md border border-gray-300 divide-y divide-gray-300">
       <thead className="bg-gray-100">
@@ -46,9 +55,7 @@ export default function ProprtiesTable() {
             type
           </th>
 
-          <th className="px-6 py-3 text-left text-sm font-medium text-gray-700">
-            operations
-          </th>
+          <th className="px-6 py-3 text-left text-sm font-medium text-gray-700"></th>
         </tr>
       </thead>
       <tbody className="divide-y divide-gray-200 ">
@@ -66,12 +73,18 @@ export default function ProprtiesTable() {
               </td>
               <td>{item.type}</td>
               <td className="flex items-center">
-                <span className="p-2 hover:transform hover:scale-110 hover:cursor-pointer transition-all ">
-                  <FaRegEdit className="sm:text-2xl" />
-                </span>
-                <span className="p-2 hover:transform hover:scale-110 hover:cursor-pointer transition-all ">
+                <button
+                  onClick={() => setIsOpenDeleteModal(true)}
+                  className="p-2 hover:transform hover:scale-110 hover:cursor-pointer transition-all text-red-500"
+                >
                   <MdDeleteOutline className="sm:text-2xl" />
-                </span>
+                </button>
+                <ConfirmationModal
+                  title="Are you sure to delete this List?"
+                  isOpen={isOpenDeleteModal}
+                  onCancel={() => setIsOpenDeleteModal(false)}
+                  onConfirm={() => handleDeleteList(item.id)}
+                />
               </td>
             </tr>
           );

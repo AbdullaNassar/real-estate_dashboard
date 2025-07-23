@@ -30,3 +30,27 @@ export async function getBookings(filter, sortBy, paginate) {
   }
   return { data, count };
 }
+
+export async function createBooking(newBooking) {
+  console.log(newBooking);
+  const { data, error } = await supabase
+    .from("bookings")
+    .insert([newBooking])
+    .select();
+  if (error) {
+    console.error(error);
+    throw new Error("Add new booking cannot be done");
+  }
+  return data;
+}
+
+export async function deleteBooking(bookingId) {
+  const { error } = await supabase
+    .from("bookings")
+    .delete()
+    .eq("id", bookingId);
+  if (error) {
+    console.log(error);
+    throw new Error("Delete Booking failed");
+  }
+}

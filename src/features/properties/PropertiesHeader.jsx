@@ -5,11 +5,10 @@ import { setFilter, setSort } from "../properties/ProprtiesSlice";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
+import AddNewList from "./AddNewList";
 
 export default function PropertiesHeader() {
-  const data = useSelector((state) => state.properties);
   const dispatch = useDispatch();
-  const [startDate, setStartDate] = useState(new Date());
 
   return (
     <div className="flex-col sm:flex-row flex p-4 bg-gray-100 gap-2">
@@ -21,70 +20,7 @@ export default function PropertiesHeader() {
       </button>
 
       {/* modal for add new List */}
-      <dialog id="my_modal_3" className="modal ">
-        <div className="modal-box bg-white">
-          <form method="dialog">
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-              ✕
-            </button>
-          </form>
-
-          <h3 className="font-semibold text-lg border-b-2 border-b-stone-300">
-            Add New Bookings
-          </h3>
-          <form className="flex flex-col gap-4 mt-4">
-            <select className="select bg-gray-200">
-              <option disabled selected>
-                Guest
-              </option>
-              <option>Crimson</option>
-              <option>Amber</option>
-              <option>Velvet</option>
-            </select>
-            <select className="select bg-gray-200">
-              <option disabled selected>
-                List ID
-              </option>
-              <option>Crimson</option>
-              <option>Amber</option>
-              <option>Velvet</option>
-            </select>
-            <div className="flex flex-col md:flex-row gap-4">
-              <div className="flex flex-col">
-                <label htmlFor="checkIn">Check In</label>
-                <DatePicker
-                  id="checkIn"
-                  className="bg-gray-200 p-2 hover:cursor-pointer"
-                  selected={startDate}
-                  onChange={(date) => setStartDate(date)}
-                />
-              </div>
-              <div className="flex flex-col">
-                <label htmlFor="checkOut">Check out</label>
-                <DatePicker
-                  id="checkOut"
-                  className="bg-gray-200 p-2 hover:cursor-pointer max-w-xs w-full"
-                  selected={startDate}
-                  onChange={(date) => setStartDate(date)}
-                />
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <label htmlFor="checkIn">Price</label>
-              <input
-                disabled={true}
-                value={200}
-                type="text"
-                className=" px-4 py-2  w-fit bg-gray-200"
-              />
-            </div>
-
-            <button className="btn bg-blue-500 text-white px-4 py-2 hover:cursor-pointer hover:bg-blue-600 transition-all rounded-sm mt-20 outline-0 border-0">
-              Add
-            </button>
-          </form>
-        </div>
-      </dialog>
+      <AddNewList />
 
       {/* filtter */}
       <select

@@ -1,7 +1,6 @@
 import supabase from "./supabase";
 
 export async function getProperties(filter, sortBy, paginate) {
-  console.log(filter, sortBy, paginate);
   let query = supabase.from("properites").select(
     `
     *,
@@ -35,4 +34,24 @@ export async function getProperties(filter, sortBy, paginate) {
     throw new Error("Listings can not be loaded");
   }
   return { data, count };
+}
+
+export async function createList(newList) {
+  const { data, error } = await supabase
+    .from("properites")
+    .insert([newList])
+    .select();
+  if (error) {
+    console.error(error);
+    throw new Error("Add new List cannot be done");
+  }
+  return data;
+}
+
+export async function deleteList(listId) {
+  const { error } = await supabase.from("properites").delete().eq("id", listId);
+  if (error) {
+    console.log(error);
+    throw new Error("Delete List failed");
+  }
 }
