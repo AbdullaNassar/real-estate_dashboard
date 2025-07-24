@@ -31,14 +31,10 @@ export default function Stats() {
   if (errorUsers || errorBookings || errorProperties)
     return <Error message={errorUsers?.message} />;
 
-  console.log(bookingsResult);
-  console.log(listsResult);
-  console.log(usersResult);
   const totalEarnings = bookingsResult?.data?.reduce(
     (acc, cur) => acc + cur.totalPrice,
     0
   );
-  console.log(totalEarnings);
   const numBookings = bookingsResult?.count;
   const numLists = listsResult?.count;
   const numUsers = usersResult?.count;

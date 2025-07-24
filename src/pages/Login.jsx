@@ -14,7 +14,7 @@ export default function Login() {
     // default values for testing website prurposes
     defaultValues: {
       email: "abdo@gmail.com",
-      password: "12345678",
+      password: "abdo@abdo1234",
     },
   });
   function submitForm(data) {
