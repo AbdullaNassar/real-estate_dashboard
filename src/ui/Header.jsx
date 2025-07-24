@@ -5,11 +5,12 @@ import { CiDark, CiLight } from "react-icons/ci";
 import { FaRegUser } from "react-icons/fa";
 import { IoMenu } from "react-icons/io5";
 import { SidebarModal } from "./Modal";
+import { BiLogOut } from "react-icons/bi";
+import { useLogout } from "../features/auth/useLogout";
 export default function Header() {
   const navigate = useNavigate();
-  const [theme, setTheme] = useState(true);
   const [isOpenSidebar, setIsOpenSidebar] = useState(false);
-
+  const { logout } = useLogout();
   return (
     <>
       <header className="bg-blue-500 p-2 sm:px-8 text-white sm:py-4 col-span-full flex justify-between items-center sticky top-0 left-0 w-full  z-10">
@@ -32,13 +33,12 @@ export default function Header() {
             placeholder="Search..."
           />
 
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-4 items-center">
             <span
-              role="button"
-              onClick={() => setTheme((prev) => !prev)}
               className="md:text-3xl hover:cursor-pointer "
+              onClick={logout}
             >
-              {theme ? <CiDark /> : <CiLight />}
+              <BiLogOut />
             </span>
             <span className="md:text-2xl hover:cursor-pointer ">
               <FaRegUser />

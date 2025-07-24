@@ -7,11 +7,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import AddBooking from "./AddBooking";
 
 export default function BookingsHeader() {
-  const data = useSelector((state) => state.bookings);
-  // console.log(data);
   const dispatch = useDispatch();
 
-  // console.log(count);
   return (
     <div className="flex-col sm:flex-row flex p-4 bg-gray-100 gap-2">
       <button
@@ -23,6 +20,7 @@ export default function BookingsHeader() {
 
       {/* Add new boooking */}
       <AddBooking />
+
       {/* filter  */}
       <select
         name="filter"

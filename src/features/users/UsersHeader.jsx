@@ -1,14 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setFilter, setSort } from "../users/usersSlice";
 
 import "react-datepicker/dist/react-datepicker.css";
 import AddNewUser from "./AddNewUser";
 
 export default function UsersHeader() {
-  const data = useSelector((state) => state.users);
   const dispatch = useDispatch();
 
-  //   console.log(count);
   return (
     <div className="flex-col sm:flex-row flex p-4 bg-gray-100 gap-2">
       <button
@@ -20,6 +18,7 @@ export default function UsersHeader() {
 
       {/* add new user */}
       <AddNewUser />
+
       {/* filter users */}
       <select
         name="filter"

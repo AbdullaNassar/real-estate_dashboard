@@ -9,7 +9,7 @@ import { setTotalPages } from "./BookingSLice";
 import { useDeleteBooking } from "./useDeleteBooking";
 import { ConfirmationModal } from "../../ui/Modal";
 
-const PAGE_LIMIT = 2;
+const PAGE_LIMIT = 10;
 export default function BookingsTable() {
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   const { isPending: isDeleting, mutate: deletBooking } = useDeleteBooking();

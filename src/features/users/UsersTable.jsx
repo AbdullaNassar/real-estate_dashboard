@@ -2,14 +2,14 @@ import { useUsers } from "./useUsers";
 import Spinner from "../../ui/Spinner";
 import Error from "../../ui/Error";
 import { MdDeleteOutline } from "react-icons/md";
-import { FaRegEdit } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { setTotalPages } from "./usersSlice";
 import { useDeleteUser } from "./useDeleteUser";
 import { useState } from "react";
 import { ConfirmationModal } from "../../ui/Modal";
 
-const PAGE_LIMIT = 2;
+const PAGE_LIMIT = 10;
+
 export default function UsersTable() {
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   const { isPending: isDeleting, mutate: deletUser } = useDeleteUser();
@@ -33,7 +33,6 @@ export default function UsersTable() {
   dispatch(setTotalPages(totalPages));
 
   const handleDeleteUser = (id) => {
-    // console.log(id);
     deletUser(id);
     setIsOpenDeleteModal(false);
   };

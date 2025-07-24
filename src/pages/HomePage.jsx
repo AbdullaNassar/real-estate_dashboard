@@ -12,7 +12,6 @@ export default function HomePage() {
       <Stats />
       <div className="grid md:grid-cols-2 gap-4">
         <SalesChart />
-
         <ListChart />
       </div>
     </div>

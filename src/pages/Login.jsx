@@ -1,11 +1,9 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { useLogin } from "../features/auth/useLogin";
 
 export default function Login() {
-  const navigate = useNavigate();
-  const { login, isLoading } = useLogin();
+  const { login } = useLogin();
   const {
     register,
     handleSubmit,
@@ -26,7 +24,7 @@ export default function Login() {
     document.title = "Maskn | Login";
   }, []);
   return (
-    <div className="bg-gray-100 min-h-screen text-stone-900 flex justify-center items-center">
+    <div className="bg-gray-100 min-h-screen text-stone-900 flex justify-center items-center flex-col gap-8">
       <div className="w-[90%] sm:w-1/2 bg-white shadow-2xl px-8 py-4  flex flex-col justify-center items-center space-y-4">
         <img src="/imgs/logoBlack.svg" alt="Maskn Logo" className="w-32" />
         <h2 className="font-semibold text-2xl text-blue-500">Login Account</h2>
@@ -66,6 +64,11 @@ export default function Login() {
             Sign in
           </button>
         </form>
+      </div>
+      <div className="space-y-2 text-stone-500">
+        <h2>Use These credential to test the website </h2>
+        <h3>Email: abdo@gmail.com</h3>
+        <h3>Password: abdo@abdo1234</h3>
       </div>
     </div>
   );

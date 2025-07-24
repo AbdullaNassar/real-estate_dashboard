@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { FaRegEdit } from "react-icons/fa";
+import { useState } from "react";
 import { MdDeleteOutline } from "react-icons/md";
 import { useProperties } from "./UseProperties";
 import Error from "../../ui/Error";
@@ -8,7 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { setTotalPages } from "./ProprtiesSlice";
 import { useDeleteList } from "./useDeleteList";
 import { ConfirmationModal } from "../../ui/Modal";
-const PAGE_LIMIT = 2;
+
+const PAGE_LIMIT = 10;
+
 export default function ProprtiesTable() {
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   const { filter, sort, page } = useSelector((state) => state.properties);
@@ -25,6 +26,7 @@ export default function ProprtiesTable() {
 
   if (isLoading) return <Spinner />;
   if (error) return <Error message={error.message} />;
+
   const properties = result?.data ?? [];
   const total = result?.count ?? 0;
   const totalPages = Math.ceil(total / PAGE_LIMIT);
@@ -34,6 +36,7 @@ export default function ProprtiesTable() {
     mutateDelete(id);
     setIsOpenDeleteModal(false);
   };
+
   return (
     <table className="table table-xs sm:table-sm md:table-md border border-gray-300 divide-y divide-gray-300">
       <thead className="bg-gray-100">

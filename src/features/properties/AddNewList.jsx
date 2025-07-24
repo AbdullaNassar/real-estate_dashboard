@@ -1,30 +1,29 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Spinner from "../../ui/Spinner";
 import Error from "../../ui/Error";
-import { useProperties } from "../properties/UseProperties";
 import { useUsers } from "../users/useUsers";
 import { useCreateList } from "./useNewProperties";
-import { useBookings } from "../bookings/useBookings";
 
 export default function AddNewLisst() {
   const { isPending: isCreating, mutate: mutateList } = useCreateList();
+
   const {
     data: UsersResults,
     isLoading: isLoadingUsers,
     error: errorUsers,
   } = useUsers();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm();
+
   if (isLoadingUsers) return <Spinner />;
   if (errorUsers) return <Error message={errorUsers.message} />;
 
   let users = UsersResults.data;
-  console.log(users);
   users = users.filter((user) => user.role == "owner");
 
   const handleAddList = (newList) => {
@@ -111,7 +110,10 @@ export default function AddNewLisst() {
             )}
           </div>
 
-          <button className="btn bg-blue-500 text-white px-4 py-2 hover:cursor-pointer hover:bg-blue-600 transition-all rounded-sm mt-20 outline-0 border-0">
+          <button
+            disabled={isCreating}
+            className="btn bg-blue-500 text-white px-4 py-2 hover:cursor-pointer hover:bg-blue-600 transition-all rounded-sm mt-20 outline-0 border-0"
+          >
             Add
           </button>
         </form>

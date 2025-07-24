@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useReducer } from "react";
 
 const initialState = {
   filter: "all",

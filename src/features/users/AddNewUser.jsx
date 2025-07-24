@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-import DatePicker from "react-datepicker";
 import { useForm } from "react-hook-form";
 import { useCreateUser } from "./useCreateUser";
 
@@ -24,6 +22,7 @@ export default function AddNewUser() {
       onSuccess: () => reset(),
     });
   };
+
   return (
     <dialog id="my_modal_3" className="modal ">
       <div className="modal-box bg-white">

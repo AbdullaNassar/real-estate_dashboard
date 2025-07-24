@@ -1,9 +1,5 @@
-import React, { useState } from "react";
-import { LuFilter } from "react-icons/lu";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setFilter, setSort } from "../properties/ProprtiesSlice";
-import DatePicker from "react-datepicker";
-
 import "react-datepicker/dist/react-datepicker.css";
 import AddNewList from "./AddNewList";
 

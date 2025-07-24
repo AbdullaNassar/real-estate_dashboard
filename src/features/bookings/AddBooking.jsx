@@ -11,35 +11,36 @@ import { useCreateBooking } from "./useCreateBooking";
 export default function AddBooking() {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const { data: result, isLoading, error } = useBookings();
+
   const { isPending: isCreating, mutate: mutateBooking } = useCreateBooking();
+  const { data: result, isLoading, error } = useBookings();
+
   const {
     data: ListsResults,
     isLoading: isLoadingLists,
     error: errorLists,
   } = useProperties();
+
   const {
     data: UsersResults,
     isLoading: isLoadingUsers,
     error: errorUsers,
   } = useUsers();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm();
+
   if (isLoading || isLoadingLists || isLoadingUsers) return <Spinner />;
   if (error || errorLists || errorUsers)
     return <Error message={error.message} />;
 
-  const data = result.data;
   const lists = ListsResults.data;
   let users = UsersResults.data;
   users = users.filter((user) => user.role == "guest");
-  // console.log(lists);
-  // console.log(users);
-  // console.log(data);
 
   const handleAddBooking = (newBooking) => {
     newBooking.checkIn = startDate;
@@ -123,7 +124,10 @@ export default function AddBooking() {
             {errors?.price && <h1 className="text-red-500">Add Price</h1>}
           </div>
 
-          <button className="btn bg-blue-500 text-white px-4 py-2 hover:cursor-pointer hover:bg-blue-600 transition-all rounded-sm mt-20 outline-0 border-0">
+          <button
+            disabled={isCreating}
+            className="btn bg-blue-500 text-white px-4 py-2 hover:cursor-pointer hover:bg-blue-600 transition-all rounded-sm mt-20 outline-0 border-0"
+          >
             Add
           </button>
         </form>

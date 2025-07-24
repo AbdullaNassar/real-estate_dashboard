@@ -73,13 +73,6 @@ export default function ListChart() {
             ))}
           </Pie>
           <Tooltip />
-          {/* <Legend
-                verticalAlign="middle"
-                align="right"
-                layout="vertical"
-                iconSize={15}
-                iconType="circle"
-              /> */}
         </PieChart>
       </ResponsiveContainer>
       <div className="flex gap-4 justify-center">
